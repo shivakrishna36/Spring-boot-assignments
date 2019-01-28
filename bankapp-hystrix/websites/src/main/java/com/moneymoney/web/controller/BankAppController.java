@@ -35,7 +35,7 @@ public class BankAppController {
 	@RequestMapping("/deposit")
 	public String deposit(@ModelAttribute Transaction transaction,
 			Model model) {
-		restTemplate.postForEntity("http://transaction/transactions", 
+		restTemplate.postForEntity("http://API-Gateway/transaction/transactions", 
 				transaction, null);
 		model.addAttribute("message","Success!");
 		return "DepositForm";
@@ -50,7 +50,7 @@ public class BankAppController {
 	@RequestMapping("/withdraw")
 	public String withdraw(@ModelAttribute Transaction transaction,
 			Model model) {
-		restTemplate.postForEntity("http://transaction/transactions/withdraw", 
+		restTemplate.postForEntity("http://API-Gateway/transaction/transactions/withdraw", 
 				transaction, null);
 		model.addAttribute("message","Success!");
 		return "withdrawForm";
@@ -68,7 +68,7 @@ public class BankAppController {
 			@ModelAttribute Transaction transaction,
 			Model model) {
 		transaction.setAccountNumber(senderAccount);
-		restTemplate.postForEntity("http://transaction/transactions/withdraw", 
+		restTemplate.postForEntity("http://API-Gateway/transaction/transactions/withdraw", 
 				transaction, null);
 		transaction.setAccountNumber(receiverAccount);
 		restTemplate.postForEntity("http://transaction/transactions", 
@@ -81,7 +81,7 @@ public class BankAppController {
 	@RequestMapping("/getStatements")
 	public ModelAndView getStatement(@RequestParam("offset") int offset,@RequestParam("size") int size)
 	{
-		CurrentDataSet dataset = restTemplate.getForObject("http://transaction/transactions/getstatements",CurrentDataSet.class);
+		CurrentDataSet dataset = restTemplate.getForObject("http://API-Gateway/transaction/transactions/getstatements",CurrentDataSet.class);
 		int currentSize = size ==0?5:size;
 		int currentOffset = offset ==0?1:offset;
 		Link next = linkTo(methodOn(BankAppController.class).getStatement(size+offset, currentSize)).withRel("next");
