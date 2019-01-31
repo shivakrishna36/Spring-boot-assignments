@@ -12,8 +12,6 @@ public class Transaction implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -6192757148078861894L;
-
-
 	private Integer transactionId;
 	private Integer accountNumber;
 	private Double amount;

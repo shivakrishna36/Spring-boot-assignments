@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import com.capgemini.app.accounts.bankaccounts.Account;
 import com.capgemini.app.accounts.resource.AccountResource;
 import com.capgemini.app.transactions.entity.Transaction;
 
@@ -26,4 +25,6 @@ public class MessageReceiver {
 	{
 		resource.updateBalance(account);
 	}
+	
+	
 }

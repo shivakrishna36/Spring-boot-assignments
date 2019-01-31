@@ -51,7 +51,9 @@ public class TransactionResource {
 		double currentBalance = entity.getBody();
 		double updatedBalance = service.withdraw(
 				transaction.getAccountNumber(),transaction.getAmount(),currentBalance, transaction.getTransactionDetails());
-		restTemplate.put("http://account/accounts/"+transaction.getAccountNumber()+"?currentBalance="+updatedBalance, null);
+		transaction.setCurrentBalance(updatedBalance);
+		sender.send(transaction);
+		//restTemplate.put("http://account/accounts/"+transaction.getAccountNumber()+"?currentBalance="+updatedBalance, null);
 		return new ResponseEntity<Transaction>(HttpStatus.OK);
 	}
 	
